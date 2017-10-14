@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/card_view"
+    android:id="@+id/card_view2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -22,17 +22,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/name2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Event name"/>
 
             <TextView
-                android:id="@+id/location"
+                android:id="@+id/location2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Location"/>
@@ -40,10 +39,9 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/duration"
+            android:id="@+id/duration2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_gravity="center"
             tools:text="Duration"/>
 

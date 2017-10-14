@@ -20,6 +20,11 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.android.sportresult.data.EventContract.EventEntry;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -37,6 +42,10 @@ public class AddEventFragment extends Fragment implements LoaderCallbacks<Cursor
     private RadioButton mFirebaseRadio;
     private Button mAddButton;
     FrameLayout addFrame;
+
+    private final String EVENT_NAME = "event";
+    private final String EVENT_LOCATION = "location";
+    private final String EVENT_DURATION = "duration";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -109,7 +118,16 @@ if (mSQLiteRadio.isChecked()) {
                 Toast.LENGTH_SHORT).show();
     }
 } else if (mFirebaseRadio.isChecked()) {
-
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myFirebaseRef = database.getReference("events");
+    Map<String,Object> valuesMap = new HashMap<>();
+    valuesMap.put(EVENT_NAME, nameString);
+    valuesMap.put(EVENT_LOCATION, locationString);
+    valuesMap.put(EVENT_DURATION, durationString);
+    //    myFirebaseRef.child(EVENT_NAME).setValue(nameString);
+    //    myFirebaseRef.child(EVENT_LOCATION).setValue(locationString);
+    //    myFirebaseRef.child(EVENT_DURATION).setValue(durationString);
+    myFirebaseRef.push().setValue(valuesMap);
 } else {
     Toast.makeText(getActivity(), getString(R.string.incomplete_event),
             Toast.LENGTH_SHORT).show();

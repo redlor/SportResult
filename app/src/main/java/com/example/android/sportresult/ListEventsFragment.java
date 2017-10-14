@@ -1,6 +1,5 @@
 package com.example.android.sportresult;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -26,7 +25,7 @@ public class ListEventsFragment extends Fragment implements LoaderManager.Loader
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     EventCursorAdapter mCursorAdapter;
-    Context context;
+
 
     @Nullable
     @Override
@@ -37,9 +36,6 @@ public class ListEventsFragment extends Fragment implements LoaderManager.Loader
         // Find the RecyclerView which will be populated with the product data
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
         mLayoutManager = new LinearLayoutManager(getActivity());
-
-
-
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // Set the adapter
