@@ -45,9 +45,14 @@ public class AddEventFragment extends Fragment implements LoaderCallbacks<Cursor
     private EditText mLocationEditText;
     private EditText mDurationEditText;
     private Uri mCurrentProductUri;
-    private RadioButton mSQLiteRadio;
-    private RadioButton mFirebaseRadio;
+    private RadioButton mSQLiteRadio, mFirebaseRadio;
+    private RadioButton mMinutesRadio, mHoursRadio, mDaysRadio;
     private Button mAddButton;
+
+    private final static String MINUTES = "minutes";
+    private final static String HOURS = "hours";
+    private final static String DAYS = "days";
+    String dataDuration;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,6 +70,10 @@ public class AddEventFragment extends Fragment implements LoaderCallbacks<Cursor
         mNameEditText = (EditText) rootView.findViewById(R.id.edit_event_name);
         mLocationEditText = (EditText) rootView.findViewById(R.id.edit_event_location);
         mDurationEditText = (EditText) rootView.findViewById(R.id.edit_event_duration);
+        mMinutesRadio = (RadioButton) rootView.findViewById(R.id.minutes_button);
+        mHoursRadio = (RadioButton) rootView.findViewById(R.id.hours_button);
+        mDaysRadio = (RadioButton) rootView.findViewById(R.id.days_button);
+
         mSQLiteRadio = (RadioButton) rootView.findViewById(R.id.sqlite_radio_button);
         mFirebaseRadio = (RadioButton) rootView.findViewById(R.id.firebase_radio_button);
         mAddButton = (Button) rootView.findViewById(R.id.button);
@@ -92,6 +101,18 @@ public class AddEventFragment extends Fragment implements LoaderCallbacks<Cursor
         String locationString = mLocationEditText.getText().toString().trim();
         String durationString = mDurationEditText.getText().toString().trim();
 
+        if(!mMinutesRadio.isChecked() & !mHoursRadio.isChecked() & !mDaysRadio.isChecked()) {
+            Toast.makeText(getActivity(), R.string.duration_needed_text, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (mMinutesRadio.isChecked()){
+            dataDuration = MINUTES;
+        } else if (mHoursRadio.isChecked()){
+            dataDuration = HOURS;
+        } else {
+            dataDuration = DAYS;
+        }
+
         // Create a ContentValues object
         ContentValues values = new ContentValues();
         if (mSQLiteRadio.isChecked()) {
@@ -113,8 +134,9 @@ public class AddEventFragment extends Fragment implements LoaderCallbacks<Cursor
                 Toast.makeText(getActivity(), R.string.duration_needed_text, Toast.LENGTH_SHORT).show();
                 return;
             } else {
-                values.put(EventEntry.COLUMN_EVENT_DURATION, durationString);
+                values.put(EventEntry.COLUMN_EVENT_DURATION, durationString + " " + dataDuration);
             }
+
 
             Uri newUri = getActivity().getContentResolver().insert(EventEntry.CONTENT_URI, values);
 
@@ -125,22 +147,23 @@ public class AddEventFragment extends Fragment implements LoaderCallbacks<Cursor
                 Toast.makeText(getActivity(), getString(R.string.editor_insert_event_successful),
                         Toast.LENGTH_SHORT).show();
             }
-
+            addFrame.setVisibility(View.INVISIBLE);
         } else if (mFirebaseRadio.isChecked()) {
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myFirebaseRef = database.getReference("events");
             Map<String, Object> valuesMap = new HashMap<>();
             valuesMap.put(EVENT_NAME, nameString);
             valuesMap.put(EVENT_LOCATION, locationString);
-            valuesMap.put(EVENT_DURATION, durationString);
+            valuesMap.put(EVENT_DURATION, durationString + " " + dataDuration);
             myFirebaseRef.push().setValue(valuesMap);
-            isLocal = false;
+            addFrame.setVisibility(View.INVISIBLE);
         } else {
             Toast.makeText(getActivity(), getString(R.string.incomplete_event),
                     Toast.LENGTH_SHORT).show();
+            addFrame.setVisibility(View.VISIBLE);
         }
 
-        addFrame.setVisibility(View.INVISIBLE);
+
 
     }
 
