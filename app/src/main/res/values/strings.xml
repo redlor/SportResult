@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SportResult</string>
+    <string name="app_name">Sport Events</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -24,5 +24,15 @@
     <string name="duration_needed_text">A duration is needed</string>
     <string name="editor_insert_event_failed">Error with saving event</string>
     <string name="editor_insert_event_successful">Event saved</string>
-    <string name="incomplete_event">Please populate all the fields!</string>
+    <string name="incomplete_event">Please insert all the required data!</string>
+
+    <string name="firebase_list_header">Firebase items</string>
+    <string name="sqlite_list_header">Local database items</string>
+    <string name="list_footer">End of the list</string>
+
+    <string name="name_label_list">Event: </string>
+    <string name="location_label_list">Location: </string>
+    <string name="duration_label_list">Duration: </string>
+
+    <string name="description">Add a new event! </string>
 </resources>

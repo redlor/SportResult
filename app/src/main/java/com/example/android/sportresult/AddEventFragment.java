@@ -13,9 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -34,6 +36,11 @@ import java.util.Map;
 public class AddEventFragment extends Fragment implements LoaderCallbacks<Cursor> {
 
     private static final int EXISTING_EVENT_LOADER = 0;
+    private final String EVENT_NAME = "event";
+    private final String EVENT_LOCATION = "location";
+    private final String EVENT_DURATION = "duration";
+    public boolean isLocal;
+    FrameLayout addFrame;
     private EditText mNameEditText;
     private EditText mLocationEditText;
     private EditText mDurationEditText;
@@ -41,22 +48,18 @@ public class AddEventFragment extends Fragment implements LoaderCallbacks<Cursor
     private RadioButton mSQLiteRadio;
     private RadioButton mFirebaseRadio;
     private Button mAddButton;
-    FrameLayout addFrame;
-
-    private final String EVENT_NAME = "event";
-    private final String EVENT_LOCATION = "location";
-    private final String EVENT_DURATION = "duration";
-
-    public boolean isLocal;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.add_event_fragment, container, false);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+        ImageView imageView = (ImageView) getActivity().findViewById(R.id.main_image);
+        imageView.setVisibility(View.GONE);
+
         addFrame = (FrameLayout) rootView.findViewById(R.id.frame_container_add);
         addFrame.setVisibility(View.VISIBLE);
-        final Intent intent =  getActivity().getIntent();
+        final Intent intent = getActivity().getIntent();
         mCurrentProductUri = intent.getData();
 
         mNameEditText = (EditText) rootView.findViewById(R.id.edit_event_name);
@@ -66,8 +69,11 @@ public class AddEventFragment extends Fragment implements LoaderCallbacks<Cursor
         mFirebaseRadio = (RadioButton) rootView.findViewById(R.id.firebase_radio_button);
         mAddButton = (Button) rootView.findViewById(R.id.button);
         mAddButton.setOnClickListener(new View.OnClickListener() {
+            private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
+
             @Override
             public void onClick(View v) {
+                v.startAnimation(buttonClick);
                 saveEvent();
             }
         });
@@ -88,69 +94,55 @@ public class AddEventFragment extends Fragment implements LoaderCallbacks<Cursor
 
         // Create a ContentValues object
         ContentValues values = new ContentValues();
-if (mSQLiteRadio.isChecked()) {
-    if (TextUtils.isEmpty(nameString)) {
-        Toast.makeText(getActivity(), R.string.name_needed_text, Toast.LENGTH_SHORT).show();
-        return;
-    } else {
-        values.put(EventEntry.COLUMN_EVENT_NAME, nameString);
-    }
+        if (mSQLiteRadio.isChecked()) {
+            if (TextUtils.isEmpty(nameString)) {
+                Toast.makeText(getActivity(), R.string.name_needed_text, Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                values.put(EventEntry.COLUMN_EVENT_NAME, nameString);
+            }
 
-    if (TextUtils.isEmpty(locationString)) {
-        Toast.makeText(getActivity(), R.string.location_needed_text, Toast.LENGTH_SHORT).show();
-        return;
-    } else {
-        values.put(EventEntry.COLUMN_EVENT_LOCATION, locationString);
-    }
+            if (TextUtils.isEmpty(locationString)) {
+                Toast.makeText(getActivity(), R.string.location_needed_text, Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                values.put(EventEntry.COLUMN_EVENT_LOCATION, locationString);
+            }
 
-    if (TextUtils.isEmpty(durationString)) {
-        Toast.makeText(getActivity(), R.string.duration_needed_text, Toast.LENGTH_SHORT).show();
-        return;
-    } else {
-        values.put(EventEntry.COLUMN_EVENT_DURATION, durationString);
-    }
+            if (TextUtils.isEmpty(durationString)) {
+                Toast.makeText(getActivity(), R.string.duration_needed_text, Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                values.put(EventEntry.COLUMN_EVENT_DURATION, durationString);
+            }
 
-    Uri newUri = getActivity().getContentResolver().insert(EventEntry.CONTENT_URI, values);
+            Uri newUri = getActivity().getContentResolver().insert(EventEntry.CONTENT_URI, values);
 
-    if (newUri == null) {
-        Toast.makeText(getActivity(), getString(R.string.editor_insert_event_failed),
-                Toast.LENGTH_SHORT).show();
-    } else {
-        Toast.makeText(getActivity(), getString(R.string.editor_insert_event_successful),
-                Toast.LENGTH_SHORT).show();
-    }
+            if (newUri == null) {
+                Toast.makeText(getActivity(), getString(R.string.editor_insert_event_failed),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getActivity(), getString(R.string.editor_insert_event_successful),
+                        Toast.LENGTH_SHORT).show();
+            }
 
-    isLocal = true;
-    isLocal();
-} else if (mFirebaseRadio.isChecked()) {
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myFirebaseRef = database.getReference("events");
-    Map<String,Object> valuesMap = new HashMap<>();
-    valuesMap.put(EVENT_NAME, nameString);
-    valuesMap.put(EVENT_LOCATION, locationString);
-    valuesMap.put(EVENT_DURATION, durationString);
-    //    myFirebaseRef.child(EVENT_NAME).setValue(nameString);
-    //    myFirebaseRef.child(EVENT_LOCATION).setValue(locationString);
-    //    myFirebaseRef.child(EVENT_DURATION).setValue(durationString);
-    myFirebaseRef.push().setValue(valuesMap);
-    isLocal = false;
-} else {
-    Toast.makeText(getActivity(), getString(R.string.incomplete_event),
-            Toast.LENGTH_SHORT).show();
-}
-
-     /*   Fragment fragment = new ListEventsFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        fragmentTransaction.replace(R.id.frame_container_add, fragment).addToBackStack(null);
-        fragmentTransaction.commit();
-       fragmentTransaction.addToBackStack(null);*/
+        } else if (mFirebaseRadio.isChecked()) {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myFirebaseRef = database.getReference("events");
+            Map<String, Object> valuesMap = new HashMap<>();
+            valuesMap.put(EVENT_NAME, nameString);
+            valuesMap.put(EVENT_LOCATION, locationString);
+            valuesMap.put(EVENT_DURATION, durationString);
+            myFirebaseRef.push().setValue(valuesMap);
+            isLocal = false;
+        } else {
+            Toast.makeText(getActivity(), getString(R.string.incomplete_event),
+                    Toast.LENGTH_SHORT).show();
+        }
 
         addFrame.setVisibility(View.INVISIBLE);
 
     }
-
 
     @Override
     public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -165,7 +157,7 @@ if (mSQLiteRadio.isChecked()) {
                 projection,
                 null,
                 null,
-                null );
+                null);
 
     }
 
@@ -184,7 +176,7 @@ if (mSQLiteRadio.isChecked()) {
             // Extract out the value from the Cursor for the given column index
             String name = cursor.getString(nameColumnIndex);
             String location = cursor.getString(locationColumnIndex);
-            String duration =  cursor.getString(durationColumnIndex);
+            String duration = cursor.getString(durationColumnIndex);
 
             // Update the views on the screen with the values from the database
             mNameEditText.setText(name);
@@ -200,7 +192,5 @@ if (mSQLiteRadio.isChecked()) {
         mDurationEditText.setText("");
     }
 
-     public boolean isLocal(){
-         return true;
-     }
+
 }

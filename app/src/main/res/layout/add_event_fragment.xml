@@ -1,136 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/frame_container_add"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame_container_add"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.android.sportresult.AddEventFragment">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/CategoryStyle"
+                    android:text="@string/event_label" />
+
+                <EditText
+                    android:id="@+id/edit_event_name"
+                    style="@style/EditorFieldStyle"
+                    android:hint="@string/hint_event_name"
+                    android:inputType="textCapWords" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/CategoryStyle"
+                    android:text="@string/location_label" />
+
+                <EditText
+                    android:id="@+id/edit_event_location"
+                    style="@style/EditorFieldStyle"
+                    android:layout_weight="6"
+                    android:hint="@string/hint_event_location"
+                    android:inputType="textCapWords" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/CategoryStyle"
+                    android:text="@string/duration_label" />
+
+                <EditText
+                    android:id="@+id/edit_event_duration"
+                    style="@style/EditorFieldStyle"
+                    android:layout_weight="6"
+                    android:hint="@string/hint_event_duration"
+                    android:inputType="textCapWords" />
+
+            </LinearLayout>
 
             <TextView
                 style="@style/CategoryStyle"
-                android:text="@string/event_label" />
-
-            <EditText
-                android:id="@+id/edit_event_name"
-                style="@style/EditorFieldStyle"
-                android:hint="@string/hint_event_name"
-                android:inputType="textCapWords" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/CategoryStyle"
-                android:text="@string/location_label" />
-
-            <EditText
-                android:id="@+id/edit_event_location"
-                style="@style/EditorFieldStyle"
-                android:layout_weight="6"
-                android:hint="@string/hint_event_location"
-                android:inputType="textCapWords" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/CategoryStyle"
-                android:text="@string/duration_label" />
-
-            <EditText
-                android:id="@+id/edit_event_duration"
-                style="@style/EditorFieldStyle"
-                android:layout_weight="6"
-                android:hint="@string/hint_event_duration"
-                android:inputType="textCapWords" />
-
-        </LinearLayout>
-
-        <TextView
-            style="@style/CategoryStyle"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/storage_label" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/storage_label" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    style="@style/CategoryStyle"
-                    android:gravity="center_horizontal"
-                    android:text="@string/sqlite_label" />
-
-                <RadioButton
-                    android:id="@+id/sqlite_radio_button"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical">
 
-            </LinearLayout>
+                    <TextView
+                        style="@style/CategoryStyle"
+                        android:gravity="center_horizontal"
+                        android:text="@string/sqlite_label" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="vertical">
+                    <RadioButton
+                        android:id="@+id/sqlite_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal" />
 
-                <TextView
-                    style="@style/CategoryStyle"
-                    android:gravity="center_horizontal"
-                    android:text="@string/firebase_label" />
+                </LinearLayout>
 
-                <RadioButton
-                    android:id="@+id/firebase_radio_button"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical">
 
+                    <TextView
+                        style="@style/CategoryStyle"
+                        android:gravity="center_horizontal"
+                        android:text="@string/firebase_label" />
+
+                    <RadioButton
+                        android:id="@+id/firebase_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal" />
+
+                </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="@string/add_event_button" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:text="@string/add_event_button"
-        android:layout_marginTop="@dimen/activity_vertical_margin" />
-
-</RelativeLayout>
+    </RelativeLayout>
 </FrameLayout>
