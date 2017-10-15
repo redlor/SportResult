@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_add_event) {
             fragmentClass = AddEventFragment.class;
         } else if (id == R.id.nav_list_events) {
-            fragmentClass = ListEventsFirebase.class;
+            fragmentClass = ListEventsFragment.class;
         }
         try {
             fragment = (Fragment) fragmentClass.newInstance();

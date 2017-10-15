@@ -47,6 +47,8 @@ public class AddEventFragment extends Fragment implements LoaderCallbacks<Cursor
     private final String EVENT_LOCATION = "location";
     private final String EVENT_DURATION = "duration";
 
+    public boolean isLocal;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.add_event_fragment, container, false);
@@ -117,6 +119,9 @@ if (mSQLiteRadio.isChecked()) {
         Toast.makeText(getActivity(), getString(R.string.editor_insert_event_successful),
                 Toast.LENGTH_SHORT).show();
     }
+
+    isLocal = true;
+    isLocal();
 } else if (mFirebaseRadio.isChecked()) {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myFirebaseRef = database.getReference("events");
@@ -128,6 +133,7 @@ if (mSQLiteRadio.isChecked()) {
     //    myFirebaseRef.child(EVENT_LOCATION).setValue(locationString);
     //    myFirebaseRef.child(EVENT_DURATION).setValue(durationString);
     myFirebaseRef.push().setValue(valuesMap);
+    isLocal = false;
 } else {
     Toast.makeText(getActivity(), getString(R.string.incomplete_event),
             Toast.LENGTH_SHORT).show();
@@ -194,8 +200,7 @@ if (mSQLiteRadio.isChecked()) {
         mDurationEditText.setText("");
     }
 
-       public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+     public boolean isLocal(){
+         return true;
+     }
 }

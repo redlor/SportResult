@@ -19,7 +19,6 @@ import com.example.android.sportresult.data.EventContract.EventEntry;
 public class EventCursorAdapter extends CursorRecyclerAdapter<EventCursorAdapter.ViewHolder>  {
 
 
-
     public EventCursorAdapter (Context context, Cursor c) {
         super(context, c);
 
@@ -52,6 +51,7 @@ public class EventCursorAdapter extends CursorRecyclerAdapter<EventCursorAdapter
         viewHolder.nameTextView.setText(eventName);
         viewHolder.locationTextView.setText(eventLocation);
         viewHolder.durationTextView.setText(eventDuration);
+
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

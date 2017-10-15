@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 /**
  * Created by Hp on 13/10/2017.
  */
@@ -16,6 +18,7 @@ public abstract class CursorRecyclerAdapter <VH extends RecyclerView.ViewHolder>
     private boolean mDataValid;
     private int mRowIdColumn;
     private DataSetObserver mDataSetObserver;
+    private ArrayList<Event> arrayList;
 
     public CursorRecyclerAdapter(Context context, Cursor c) {
         this.ac = context;
