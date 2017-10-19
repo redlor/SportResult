@@ -38,6 +38,7 @@ public class ListEventsFragment extends Fragment implements LoaderManager.Loader
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private DynamicListAdapter mDynamicListAdapter;
+    ImageView imageView;
 
 
     @Nullable
@@ -47,7 +48,7 @@ public class ListEventsFragment extends Fragment implements LoaderManager.Loader
         rootView = inflater.inflate(R.layout.list_events_fragments, container, false);
         getLoaderManager().initLoader(EVENT_LOADER, null, this);
 
-        ImageView imageView = (ImageView) getActivity().findViewById(R.id.main_image);
+        imageView = (ImageView) getActivity().findViewById(R.id.main_image);
         imageView.setVisibility(View.GONE);
 
 
@@ -58,7 +59,12 @@ public class ListEventsFragment extends Fragment implements LoaderManager.Loader
     public void onStart() {
         super.onStart();
 
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        imageView.setVisibility(View.VISIBLE);
     }
 
     @Override

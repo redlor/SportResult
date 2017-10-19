@@ -54,12 +54,14 @@ public class AddEventFragment extends Fragment implements LoaderCallbacks<Cursor
     private final static String DAYS = "days";
     String dataDuration;
 
+    ImageView imageView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.add_event_fragment, container, false);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        ImageView imageView = (ImageView) getActivity().findViewById(R.id.main_image);
+        imageView = (ImageView) getActivity().findViewById(R.id.main_image);
         imageView.setVisibility(View.GONE);
 
         addFrame = (FrameLayout) rootView.findViewById(R.id.frame_container_add);
@@ -215,5 +217,9 @@ public class AddEventFragment extends Fragment implements LoaderCallbacks<Cursor
         mDurationEditText.setText("");
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        imageView.setVisibility(View.VISIBLE);
+    }
 }

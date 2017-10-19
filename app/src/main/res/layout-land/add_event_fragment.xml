@@ -55,7 +55,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
+
                 android:orientation="horizontal">
 
                 <TextView
@@ -150,17 +150,16 @@
 
             </LinearLayout>
 
-            <TextView
-                style="@style/CategoryStyle"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/storage_label" />
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:orientation="horizontal">
+
+                <TextView
+                    style="@style/CategoryStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/storage_label" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"

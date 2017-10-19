@@ -1,6 +1,5 @@
 package com.example.android.sportresult;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -42,15 +41,13 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-            if (getSupportFragmentManager().findFragmentByTag("fragment") != null) {
+        }
+        if (getSupportFragmentManager().findFragmentByTag("fragment") != null) {
                 getSupportFragmentManager().popBackStack();
-            }
         } else {
             super.onBackPressed();
         }
-        // Return to the MainActivity when back is pressed
-        Intent i = new Intent(this, MainActivity.class);
-        startActivityForResult(i, 1);
+
 
     }
 
