@@ -55,7 +55,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
+
                 android:orientation="horizontal">
 
                 <TextView
@@ -150,16 +150,9 @@
 
             </LinearLayout>
 
-            <TextView
-                style="@style/CategoryStyle"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/storage_label" />
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -167,6 +160,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/CategoryStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/storage_label" />
 
                     <TextView
                         style="@style/CategoryStyle"
@@ -181,7 +180,7 @@
                 </LinearLayout>
 
                 <RadioGroup
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:orientation="horizontal">
@@ -190,18 +189,17 @@
                         android:id="@+id/sqlite_radio_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_left_rb"
-                        android:layout_marginRight="@dimen/margin_right_rb" />
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="@dimen/margin_rb_land"
+                        android:layout_marginRight="@dimen/margin_rb_land" />
 
                     <RadioButton
                         android:id="@+id/firebase_radio_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="" />
+                        android:layout_gravity="center_horizontal" />
 
                 </RadioGroup>
-
-
             </LinearLayout>
 
         </LinearLayout>

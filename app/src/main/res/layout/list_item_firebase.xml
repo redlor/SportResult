@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/card_view"
+    android:id="@+id/card_view_firebase"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -11,7 +11,7 @@
     android:layout_marginRight="@dimen/cornerRadius"
     android:layout_marginTop="@dimen/card_margin"
     android:background="@android:drawable/dialog_holo_light_frame"
-    android:backgroundTint="@android:color/holo_orange_light"
+    android:backgroundTint="@android:color/holo_blue_dark"
     card_view:cardCornerRadius="@dimen/cornerRadius">
 
     <LinearLayout
@@ -41,28 +41,29 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/name"
+                    android:id="@+id/name_firebase"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="Event" />
+                    tools:text="Name" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/textview_spacing"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/textview_spacing"
                     android:text="@string/location_label_list"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/location"
+                    android:id="@+id/location_firebase"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="Location" />
@@ -74,8 +75,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:orientation="horizontal">
 
@@ -87,11 +86,12 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/duration"
+                android:id="@+id/duration_firebase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 tools:text="Duration" />
 
-        </LinearLayout>
+               </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>

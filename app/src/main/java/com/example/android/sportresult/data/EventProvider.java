@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.android.sportresult.data.EventContract.EventEntry;
+
 /**
  * Created by Hp on 13/10/2017.
  */
@@ -57,7 +58,7 @@ public class EventProvider extends ContentProvider {
 
         switch (match) {
             case EVENTS:
-            //This cursor contains multiple rows
+                //This cursor contains multiple rows
                 cursor = database.query(EventEntry.TABLE_NAME, projection, selection, selectionArgs,
                         null, null, sortOrder);
                 break;
@@ -104,6 +105,7 @@ public class EventProvider extends ContentProvider {
                 throw new IllegalArgumentException("Insertion is not supported for " + uri);
         }
     }
+
     private Uri insertEvent(Uri uri, ContentValues values) {
         // Check that the fileds are not null
         String name = values.getAsString(EventEntry.COLUMN_EVENT_NAME);

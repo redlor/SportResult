@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SportResult</string>
+    <string name="app_name">Sport Events</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -13,7 +13,7 @@
     <string name="location_label">Event location</string>
     <string name="hint_event_location">Insert Location</string>
     <string name="duration_label">Event duration</string>
-    <string name="hint_event_duration">Insert Duration</string>
+    <string name="hint_event_duration">100</string>
     <string name="storage_label">Place of storage</string>
     <string name="sqlite_label">Local Database</string>
     <string name="firebase_label">Firebase</string>
@@ -24,5 +24,19 @@
     <string name="duration_needed_text">A duration is needed</string>
     <string name="editor_insert_event_failed">Error with saving event</string>
     <string name="editor_insert_event_successful">Event saved</string>
-    <string name="incomplete_event">Please populate all the fields!</string>
+    <string name="incomplete_event">Please insert all the required data!</string>
+
+    <string name="firebase_list_header">Firebase items</string>
+    <string name="sqlite_list_header">Local database items</string>
+    <string name="list_footer">End of the list</string>
+
+    <string name="name_label_list">Event: </string>
+    <string name="location_label_list">Location: </string>
+    <string name="duration_label_list">Duration: </string>
+
+    <string name="description">Add a new event! </string>
+
+    <string name="minutes">Min </string>
+    <string name="hours">Hours </string>
+    <string name="days">Days </string>
 </resources>

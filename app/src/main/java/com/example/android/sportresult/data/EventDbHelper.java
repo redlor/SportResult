@@ -3,7 +3,9 @@ package com.example.android.sportresult.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import com.example.android.sportresult.data.EventContract.EventEntry;
+
 /**
  * Created by Hp on 13/10/2017.
  */
